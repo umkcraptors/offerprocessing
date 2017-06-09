@@ -1,0 +1,63 @@
+package com.businessintelli.offerprocessing.model;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "MARKETER")
+public class Marketer implements Serializable{
+
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int pMarketerId;
+	private String pDomain;
+	private String pMarketerType;
+	private String pName;
+	private String pIsActive;
+	
+	
+	public int getpMarketerId() {
+		return pMarketerId;
+	}
+	public void setpMarketerId(int pMarketerId) {
+		this.pMarketerId = pMarketerId;
+	}
+	public String getpDomain() {
+		return pDomain;
+	}
+	public void setpDomain(String pDomain) {
+		this.pDomain = pDomain;
+	}
+	public String getpMarketerType() {
+		return pMarketerType;
+	}
+	public void setpMarketerType(String pMarketerType) {
+		this.pMarketerType = pMarketerType;
+	}
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+	public String getpIsActive() {
+		return pIsActive;
+	}
+	public void setpIsActive(String pIsActive) {
+		this.pIsActive = pIsActive;
+	}
+	@Override
+	public String toString() {
+		return "Marketer [pMarketerId=" + pMarketerId + ", pDomain=" + pDomain + ", pMarketerType=" + pMarketerType
+				+ ", pName=" + pName + ", pIsActive=" + pIsActive + "]";
+	}
+	
+
+}
+

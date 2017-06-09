@@ -1,0 +1,5 @@
+package com.businessintelli.offerprocessing.model;
+
+public class Consumer {
+
+}

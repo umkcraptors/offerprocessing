@@ -1,0 +1,49 @@
+package com.businessintelli.offerprocessing.model;
+import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+public class Consumer implements Serializable  {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int Id;
+	private int MarketerId;
+	private String Handle;
+	private String Email;
+	private String firstName;
+	private String middleName;
+	private String lastName;
+	private String phone;
+	private char status;
+	
+	public Consumer() {
+		
+	}
+	
+	public Consumer(int id, int marketerId, String handle, String email, String firstName, String middleName,
+			String lastName, String phone, char status) {
+		
+		Id = id;
+		MarketerId = marketerId;
+		Handle = handle;
+		Email = email;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.status = status;
+	}
+	
+
+}
