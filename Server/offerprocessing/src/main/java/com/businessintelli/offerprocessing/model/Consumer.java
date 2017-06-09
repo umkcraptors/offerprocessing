@@ -22,7 +22,7 @@ public class Consumer implements Serializable  {
 	@Id
 	@Column(name = "CONSUMERID")
 	@GeneratedValue
-	private int Id;
+	private int consumerId;
 	
 	@OneToOne
     @JoinColumn(name="MARKETERID")
@@ -46,10 +46,12 @@ public class Consumer implements Serializable  {
 		
 	}
 	
-	public Consumer(int id, int marketerId, String handle, String email, String firstName, String middleName,
+
+
+	public Consumer(int consumerId, int marketerId, String handle, String email, String firstName, String middleName,
 			String lastName, String phone, char status) {
-		
-		Id = id;
+		super();
+		this.consumerId = consumerId;
 		MarketerId = marketerId;
 		Handle = handle;
 		Email = email;
@@ -60,12 +62,14 @@ public class Consumer implements Serializable  {
 		this.status = status;
 	}
 
-	public int getId() {
-		return Id;
+
+
+	public int getconsumerId() {
+		return consumerId;
 	}
 
-	public void setId(int id) {
-		Id = id;
+	public void setconsumerId(int consumerId) {
+		this.consumerId = consumerId;
 	}
 
 	public int getMarketerId() {
