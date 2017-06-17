@@ -1,4 +1,6 @@
-DROP table SupplierProduct;
+0
+
+0DROP table SupplierProduct;
 
 DROP table SupplierOffer;
 
@@ -22,7 +24,7 @@ DROP table MarketerPreferredSupplier;
 
 DROP table Marketer;
 
-DROP table Consumers;
+DROP table Consumer;
 
 
 
