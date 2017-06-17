@@ -1,0 +1,5 @@
+package com.businessintelli.offerprocessing.dao;
+
+public class MarketerDao {
+
+}
