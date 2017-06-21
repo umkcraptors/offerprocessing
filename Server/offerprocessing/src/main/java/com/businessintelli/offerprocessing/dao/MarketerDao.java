@@ -1,7 +1,11 @@
 package com.businessintelli.offerprocessing.dao;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -13,6 +17,7 @@ public class MarketerDao implements MarketerDaoInterface <Marketer, String> {
 
 	private Session currentSession;
 	private Transaction currentTransaction;
+	private EntityManager manager;
 
 	public MarketerDao() {
 
@@ -49,7 +54,7 @@ public class MarketerDao implements MarketerDaoInterface <Marketer, String> {
 
 	}
 
-	private static SessionFactory getSessionFactory() {
+	public static SessionFactory getSessionFactory() {
 
 		Configuration configuration = new Configuration().configure();
 
@@ -88,11 +93,14 @@ public class MarketerDao implements MarketerDaoInterface <Marketer, String> {
 	}
 
 	public void persist(Marketer entity) {
-
-		getCurrentSession().save(entity);
+		Session session = MarketerDao.getSessionFactory().openSession();
+//     Transaction t = session.beginTransaction();
+		System.out.println(getCurrentSession());
+		session.persist(entity);
+		session.flush();
+//		t.commit();
 
 	}
-
 	public void update(Marketer entity) {
 
 		getCurrentSession().update(entity);
@@ -101,6 +109,7 @@ public class MarketerDao implements MarketerDaoInterface <Marketer, String> {
 
 	public Marketer findById(String id) {
 		
+		//return getCurrentSession().byId(Marketer.class)
 		return null;
 	}
 

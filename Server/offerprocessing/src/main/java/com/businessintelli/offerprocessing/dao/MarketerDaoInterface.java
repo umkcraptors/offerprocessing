@@ -6,7 +6,7 @@ import com.businessintelli.offerprocessing.model.*;
 
 public interface MarketerDaoInterface<Marketer, Id extends Serializable> {
 
-	public void persist(Marketer entity);
+	public   void persist(Marketer entity);
 
 	public void update(Marketer entity);
 	

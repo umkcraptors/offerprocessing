@@ -1,0 +1,46 @@
+<?xml version=”1.0″ encoding=”UTF-8″?>
+<!DOCTYPE beans PUBLIC “-//SPRING//DTD BEAN//EN”
+“http://www.springframework.org/dtd/spring-beans.dtd”>
+<beans>
+<bean id=”dataSource”
+class=”org.springframework.jdbc.datasource.DriverManagerDataSource”>
+<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+  <property name="hibernate.connection.url">jdbc:oracle:thin:@bizintelli.ckhkrxleqe3b.us-west-2.rds.amazonaws.com</property>
+  <property name="hibernate.connection.username">bizintelli</property>
+  <property name="hibernate.connection.password">Secbad2Iselin</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+  <property name="hibernate.default_schema">BizIntelli-AWS</property>
+</bean>
+<bean id=”sessionFactory”
+class=”org.springframework.orm.hibernate3.LocalSessionFactoryBean”>
+<property name=”dataSource”>
+<ref local=”dataSource” />
+</property>
+<property name=”mappingResources”>
+<list>
+<value>Customer.hbm.xml</value>
+</list>
+</property>
+<property name=”hibernateProperties”>
+<props>
+<prop key=”hibernate.show_sql”>true</prop>
+<prop key=”hibernate.current_session_context_class”>thread</prop>
+</props>
+</property>
+</bean>
+<bean id=”transactionManager”
+class=”org.springframework.orm.hibernate3.HibernateTransactionManager”>
+<property name=”sessionFactory”>
+<ref local=”sessionFactory” />
+</property>
+<property name=”dataSource”>
+<ref local=”dataSource” />
+</property>
+</bean>
+<bean id=”customerDAO”
+class=”CustomerDAO”>
+<property name=”sessionFactory”>
+<ref bean=”sessionFactory” />
+</property>
+</bean>
+</beans>
