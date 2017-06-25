@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bizintelli.offerprocessing.dao.MarketerDAO;
 import com.bizintelli.offerprocessing.dao.MarketerDAOImpl;
 import com.bizintelli.offerprocessing.entity.Marketer;
+import com.bizintelli.offerprocessing.exception.DeleteFailedException;
 import com.bizintelli.offerprocessing.exception.InsertFailedException;
+import com.bizintelli.offerprocessing.exception.UpdateFailedException;
 
 @Service("marketerService")
 @Transactional
@@ -31,7 +33,7 @@ public class MarketerServiceImpl implements MarketerService {
 		return marketer;
 	}
 	@Transactional
-	public Marketer updateMarketer(Marketer marketer) {
+	public Marketer updateMarketer(Marketer marketer) throws UpdateFailedException{
 		LOG.info("updating Marketers");
 		System.out.println("Marketer Service Update invoked:");
 		marketer = marketerDAO.updateMarketer(marketer);
@@ -59,7 +61,7 @@ public class MarketerServiceImpl implements MarketerService {
 		return marketerDAO.getMarketers();
 	}
 	@Transactional
-	public void deleteMarketer(long marketerId) {
+	public void deleteMarketer(long marketerId) throws DeleteFailedException {
 		LOG.info("Deleting Marketer with " + marketerId);
 		marketerDAO.deleteMarketer(marketerId);
 	}

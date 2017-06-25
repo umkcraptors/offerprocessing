@@ -1,9 +1,11 @@
 C:\Users\BIS001\Desktop\offer-processing-webservice\src\main\java\com\bizintelli\offerprocessing\services\MarketerServiceImpl.java
 C:\Users\BIS001\Desktop\offer-processing-webservice\src\main\java\com\bizintelli\offerprocessing\rest\conroller\MarketerController.java
 C:\Users\BIS001\Desktop\offer-processing-webservice\src\main\java\com\bizintelli\offerprocessing\rest\dto\ResponseDTO.java
+C:\Users\BIS001\Desktop\offer-processing-webservice\src\main\java\com\bizintelli\offerprocessing\exception\DeleteFailedException.java
 C:\Users\BIS001\Desktop\offer-processing-webservice\src\main\java\com\bizintelli\offerprocessing\exception\InsertFailedException.java
 C:\Users\BIS001\Desktop\offer-processing-webservice\src\main\java\com\bizintelli\offerprocessing\rest\dto\StatusDTO.java
 C:\Users\BIS001\Desktop\offer-processing-webservice\src\main\java\com\bizintelli\offerprocessing\services\MarketerService.java
 C:\Users\BIS001\Desktop\offer-processing-webservice\src\main\java\com\bizintelli\offerprocessing\dao\MarketerDAO.java
 C:\Users\BIS001\Desktop\offer-processing-webservice\src\main\java\com\bizintelli\offerprocessing\entity\Marketer.java
 C:\Users\BIS001\Desktop\offer-processing-webservice\src\main\java\com\bizintelli\offerprocessing\dao\MarketerDAOImpl.java
+C:\Users\BIS001\Desktop\offer-processing-webservice\src\main\java\com\bizintelli\offerprocessing\exception\UpdateFailedException.java

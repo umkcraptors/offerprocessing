@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bizintelli.offerprocessing.entity.Marketer;
+import com.bizintelli.offerprocessing.exception.DeleteFailedException;
 import com.bizintelli.offerprocessing.exception.InsertFailedException;
+import com.bizintelli.offerprocessing.exception.UpdateFailedException;
 import com.bizintelli.offerprocessing.rest.conroller.MarketerController;
 
 @Repository("marketerDAO")
@@ -37,12 +39,14 @@ public class MarketerDAOImpl implements MarketerDAO{
 	}
 
 	@Transactional(readOnly=false)
-	public Marketer updateMarketer(Marketer marketer) {
+	public Marketer updateMarketer(Marketer marketer) throws UpdateFailedException 
+	{
 		LOG.info("updating Marketers");
 		try{
 			entityManager.merge(marketer);
 		}catch(Exception e){
 			LOG.error("Exception" +e);
+			throw new UpdateFailedException("Failed to Update Marketer"+ e);
 		}
 		finally{
 		}
@@ -50,13 +54,15 @@ public class MarketerDAOImpl implements MarketerDAO{
 	}
 
 	@Transactional(readOnly=false)
-	public void deleteMarketer(long marketerId) {
+	public void deleteMarketer(long marketerId) throws DeleteFailedException
+	{
 		LOG.info("Deleting Marketers");
 		Marketer cusomer = getMarketer(marketerId);
 		try{
 			entityManager.remove(cusomer);
 		}catch(Exception e){
 			LOG.error("Exception" +e);
+			throw new DeleteFailedException("Failed to Delete Marketer"+ e);
 		}
 		
 		LOG.info("Marketer Deleted");

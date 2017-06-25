@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bizintelli.offerprocessing.entity.Marketer;
+import com.bizintelli.offerprocessing.exception.DeleteFailedException;
 import com.bizintelli.offerprocessing.exception.InsertFailedException;
+import com.bizintelli.offerprocessing.exception.UpdateFailedException;
 import com.bizintelli.offerprocessing.rest.dto.ResponseDTO;
 import com.bizintelli.offerprocessing.rest.dto.StatusDTO;
 import com.bizintelli.offerprocessing.services.MarketerService;
@@ -43,7 +45,12 @@ public class MarketerController {
 	}
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public Marketer editMarketer(@RequestBody Marketer marketer){
-		 marketer = marketerService.updateMarketer(marketer);
+		 try {
+			marketer = marketerService.updateMarketer(marketer);
+		} catch (UpdateFailedException e) {
+			
+			e.printStackTrace();
+		}
 		return marketer;
 		
 	}
@@ -71,10 +78,17 @@ public class MarketerController {
 	@RequestMapping(value="/delete/{marketerId}",method=RequestMethod.GET)
 	public StatusDTO delete(@PathVariable("marketerId") long marketerId){
 		LOG.info("delete Marketers for " + marketerId);
-		marketerService.deleteMarketer(marketerId);
 		StatusDTO status = new StatusDTO();
-		status.setMessage("Marketer Deleted Successfully");
-		status.setStatus(200);
+		try {
+			marketerService.deleteMarketer(marketerId);
+			status.setMessage("Marketer Deleted Successfully");
+			status.setStatus(200);
+		} catch (DeleteFailedException e) {
+			e.printStackTrace();
+			status.setMessage("Marketer Deleted Failed");
+			status.setStatus(-200);
+		}
+		
 		return status;
 	}
 	
