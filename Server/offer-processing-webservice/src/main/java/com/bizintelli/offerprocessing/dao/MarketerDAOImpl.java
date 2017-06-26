@@ -1,5 +1,7 @@
 package com.bizintelli.offerprocessing.dao;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bizintelli.offerprocessing.entity.Marketer;
 import com.bizintelli.offerprocessing.exception.DeleteFailedException;
 import com.bizintelli.offerprocessing.exception.InsertFailedException;
+import com.bizintelli.offerprocessing.exception.RetrieveFailedException;
 import com.bizintelli.offerprocessing.exception.UpdateFailedException;
 import com.bizintelli.offerprocessing.rest.conroller.MarketerController;
 
@@ -30,7 +33,10 @@ public class MarketerDAOImpl implements MarketerDAO{
 		try{
 			entityManager.persist(marketer);
 		}catch(Exception e){
-			LOG.error("Exception" +e );
+			
+			StringWriter stack = new StringWriter();
+			e.printStackTrace(new PrintWriter(stack));			
+			LOG.error("Exception" +stack );
 			throw new InsertFailedException("Failed to insert Marketer"+ e);
 		}
 		finally{
@@ -54,30 +60,35 @@ public class MarketerDAOImpl implements MarketerDAO{
 	}
 
 	@Transactional(readOnly=false)
-	public void deleteMarketer(long marketerId) throws DeleteFailedException
+	public void deleteMarketer(long marketerId) throws DeleteFailedException, RetrieveFailedException
 	{
 		LOG.info("Deleting Marketers");
-		Marketer cusomer = getMarketer(marketerId);
+		Marketer cusomer;
+		
+			cusomer = getMarketer(marketerId);
+		
 		try{
 			entityManager.remove(cusomer);
 		}catch(Exception e){
 			LOG.error("Exception" +e);
 			throw new DeleteFailedException("Failed to Delete Marketer"+ e);
+			
 		}
 		
 		LOG.info("Marketer Deleted");
 	}
 
 	@Transactional(readOnly=true)
-	public Marketer getMarketer(long marketerId) {
+	public Marketer getMarketer(long marketerId) throws RetrieveFailedException
+	{
 		String sql = "select marketer from Marketer marketer where marketer.id="+marketerId;
 		try{
 			return (Marketer) entityManager.createQuery(sql).getSingleResult();
 		}catch(Exception e){
 			LOG.error(e.getStackTrace().toString());
 			LOG.error("Exception", e);
+			throw new RetrieveFailedException("Failed to Retrieve Marketer"+ e);
 		}
-		return null;
 	}
 
 	@Transactional(readOnly=true)

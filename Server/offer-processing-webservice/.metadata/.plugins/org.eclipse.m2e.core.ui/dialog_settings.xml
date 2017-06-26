@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Offerprocessing\Server\offer-processing-webservice"/>
 			<item value="C:\Users\BIS001\Desktop\offer-processing-webservice"/>
 		</list>
 		<list key="projectNameTemplate">

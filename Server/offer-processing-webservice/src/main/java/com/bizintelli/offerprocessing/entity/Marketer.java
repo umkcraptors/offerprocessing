@@ -44,13 +44,13 @@ public class Marketer implements Serializable {
 	@Column(name = "createdTime")
 	private Date createdDate;
 	
-	@Transient
+	@Column(name = "updatedby")
 	private String updatedBy;
 	
-	@Transient
+	@Column(name = "updatedTime")
 	private Date updatedDate;
 	
-	@Transient
+	@Column(name = "isactive")
 	private Boolean isActive;
 	
 	public long getId() {

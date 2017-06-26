@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bizintelli.offerprocessing.entity.Marketer;
 import com.bizintelli.offerprocessing.exception.DeleteFailedException;
 import com.bizintelli.offerprocessing.exception.InsertFailedException;
+import com.bizintelli.offerprocessing.exception.RetrieveFailedException;
 import com.bizintelli.offerprocessing.exception.UpdateFailedException;
 import com.bizintelli.offerprocessing.rest.dto.ResponseDTO;
 import com.bizintelli.offerprocessing.rest.dto.StatusDTO;
@@ -34,7 +35,13 @@ public class MarketerController {
 	@GetMapping("/{marketerId}")
 	public Marketer getMarketers(@PathVariable("marketerId") long marketerId){
 		LOG.info("getMarketers for " + marketerId);
-		return marketerService.getMarketer(marketerId);
+		try {
+			return marketerService.getMarketer(marketerId);
+		} catch (RetrieveFailedException e) {
+			
+			e.printStackTrace();
+		}
+		return null;
 	}
 	@RequestMapping(value="/all",method=RequestMethod.GET)
 	public List<Marketer> allMarketers(){

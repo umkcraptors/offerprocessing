@@ -13,6 +13,7 @@ import com.bizintelli.offerprocessing.dao.MarketerDAOImpl;
 import com.bizintelli.offerprocessing.entity.Marketer;
 import com.bizintelli.offerprocessing.exception.DeleteFailedException;
 import com.bizintelli.offerprocessing.exception.InsertFailedException;
+import com.bizintelli.offerprocessing.exception.RetrieveFailedException;
 import com.bizintelli.offerprocessing.exception.UpdateFailedException;
 
 @Service("marketerService")
@@ -42,7 +43,7 @@ public class MarketerServiceImpl implements MarketerService {
 		
 	}
 
-	public Marketer getMarketer(long marketerId) {
+	public Marketer getMarketer(long marketerId) throws RetrieveFailedException {
 		LOG.info("getMarketers for " + marketerId);
 		try
 		{
@@ -63,7 +64,12 @@ public class MarketerServiceImpl implements MarketerService {
 	@Transactional
 	public void deleteMarketer(long marketerId) throws DeleteFailedException {
 		LOG.info("Deleting Marketer with " + marketerId);
-		marketerDAO.deleteMarketer(marketerId);
+		try {
+			marketerDAO.deleteMarketer(marketerId);
+		} catch (RetrieveFailedException e) {
+			
+			e.printStackTrace();
+		}
 	}
 
 
