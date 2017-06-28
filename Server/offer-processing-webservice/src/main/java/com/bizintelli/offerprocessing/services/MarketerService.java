@@ -15,5 +15,5 @@ public interface MarketerService {
 	public Marketer updateMarketer(Marketer marketer) throws UpdateFailedException;
 	public Marketer getMarketer(long marketerId) throws RetrieveFailedException;
 	public List<Marketer> getAllMarketers();
-	public  void deleteMarketer(long marketerId) throws DeleteFailedException;
+	public  boolean deleteMarketer(long marketerId) throws DeleteFailedException;
 }

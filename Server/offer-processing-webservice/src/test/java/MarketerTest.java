@@ -1,3 +1,5 @@
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeansException;
@@ -35,14 +37,20 @@ public class MarketerTest {
 	public void insertMarketertest() {
 
 		m.setDomain("Apple");
-		m.setMarketertype("Phones");
+		//m.setMarketertype("Phones");
 		m.setName("Steve Jobs");
 
 		try {
-			dataServices.addMarketer(m);
+			Marketer mrktr = dataServices.addMarketer(m);
+			assertFalse(mrktr == null);
 		} catch (InsertFailedException e) {
 
 			e.printStackTrace();
+			assertFalse(true);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			assertFalse(true);
 		}
 
 	}
@@ -54,6 +62,7 @@ public class MarketerTest {
 			Marketer m = dataServices.getMarketer(17);
 			m.setName("Walmart.com");
 			dataServices.updateMarketer(m);
+			assertFalse(m != null);
 			System.out.println(m);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,7 +72,9 @@ public class MarketerTest {
 	@Test
 	public void deleteMarketertest() {
 		try {
-			dataServices.deleteMarketer(16);
+			boolean m;
+			m=dataServices.deleteMarketer(13);
+			assertTrue(m);
 		} catch (DeleteFailedException e) {
 
 			e.printStackTrace();
@@ -71,13 +82,44 @@ public class MarketerTest {
 	}
 	
 	@Test
-	public void retrieveMarketertest() throws DeleteFailedException {
+	public void retrieveMarketerNegTest() throws DeleteFailedException {
 		try {
-			dataServices.getMarketer(5);
+			Marketer mrktr = dataServices.getMarketer(5);
+			System.out.println("Marketer:" + mrktr.getName() );
+			assertFalse(mrktr != null && mrktr.getName().startsWith("amazon"));
+						
 		} catch (RetrieveFailedException e) {
 			e.printStackTrace();
+			assertFalse(true);
 		}
 	}
 	
+	@Test
+	public void retrieveMarketerNegTest1() throws DeleteFailedException {
+		try {
+			Marketer mrktr = dataServices.getMarketer(5);
+			System.out.println("Marketer:" + mrktr.getName() );
+			assertFalse(mrktr != null && mrktr.getName().startsWith("amazon"));
+						
+		} catch (RetrieveFailedException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		}
+	}
+
+	@Test
+	public void retrieveMarketertest() throws DeleteFailedException {
+		try {
+			Marketer mrktr = dataServices.getMarketer(5000);
+			assertTrue(mrktr != null && mrktr.getName().startsWith("Patel"));
+						
+		} catch (RetrieveFailedException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			assertFalse(true);
+		}
+	}
 
 }

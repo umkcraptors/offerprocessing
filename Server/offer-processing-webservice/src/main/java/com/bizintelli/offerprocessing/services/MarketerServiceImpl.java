@@ -62,7 +62,7 @@ public class MarketerServiceImpl implements MarketerService {
 		return marketerDAO.getMarketers();
 	}
 	@Transactional
-	public void deleteMarketer(long marketerId) throws DeleteFailedException {
+	public boolean deleteMarketer(long marketerId) throws DeleteFailedException {
 		LOG.info("Deleting Marketer with " + marketerId);
 		try {
 			marketerDAO.deleteMarketer(marketerId);
@@ -70,6 +70,7 @@ public class MarketerServiceImpl implements MarketerService {
 			
 			e.printStackTrace();
 		}
+		return false;
 	}
 
 
