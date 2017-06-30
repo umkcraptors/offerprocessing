@@ -1,6 +1,8 @@
 package com.bizintelli.offerprocessing.services;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import com.bizintelli.offerprocessing.exception.DeleteFailedException;
 import com.bizintelli.offerprocessing.exception.InsertFailedException;
 import com.bizintelli.offerprocessing.exception.RetrieveFailedException;
 import com.bizintelli.offerprocessing.exception.UpdateFailedException;
+import com.bizintelli.offerprocessing.rest.conroller.MarketerController;
 
 @Service("marketerService")
 @Transactional
@@ -25,11 +28,28 @@ public class MarketerServiceImpl implements MarketerService {
 	@Qualifier("marketerDAO")
 	private MarketerDAO marketerDAO;
 	
+	
 	@Transactional
 	public Marketer addMarketer(Marketer marketer) throws  InsertFailedException{
-		LOG.info("adding Marketers");
+				LOG.info("adding Marketers");
 		System.out.println("Marketer Service create invoked:");
+		ExecutorService executorService = Executors.newFixedThreadPool(3);
+		MarketerWorkerThread worker1 = new MarketerWorkerThread("object1");
+		MarketerWorkerThread worker2 = new MarketerWorkerThread("object2");
+		MarketerWorkerThread worker3 = new MarketerWorkerThread("object3");
+		MarketerWorkerThread worker4 = new MarketerWorkerThread("object4");
+		MarketerWorkerThread worker5 = new MarketerWorkerThread("object5");
+		MarketerWorkerThread worker6 = new MarketerWorkerThread("object6");
+		MarketerWorkerThread worker7 = new MarketerWorkerThread("object7");
+		executorService.execute(worker1);
+		executorService.execute(worker2);
+		executorService.execute(worker3);
+		executorService.execute(worker4);
+		executorService.execute(worker5);
+		executorService.execute(worker6);
+		executorService.execute(worker7);
 		marketer = marketerDAO.addMarketer(marketer);
+		
 		LOG.error("Marketer added");
 		return marketer;
 	}
@@ -75,3 +95,7 @@ public class MarketerServiceImpl implements MarketerService {
 
 
 }
+
+
+
+

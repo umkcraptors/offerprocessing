@@ -20,6 +20,7 @@ import com.bizintelli.offerprocessing.exception.RetrieveFailedException;
 import com.bizintelli.offerprocessing.services.MarketerService;
 import com.bizintelli.offerprocessing.services.MarketerServiceImpl;
 
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:applicationContext-jdbc.xml" })
 public class MarketerTest {
@@ -27,17 +28,17 @@ public class MarketerTest {
 	@Autowired(required = true)
 	@Qualifier("marketerService")
 	MarketerService dataServices;
-	MarketerServiceImpl ms = new MarketerServiceImpl();
-	MarketerDAOImpl md = new MarketerDAOImpl();
-	Marketer m = new Marketer();
+
+	
 
 	@Test
 	// @Transactional
 	// @Rollback(true)
 	public void insertMarketertest() {
+		Marketer m = new Marketer();
 
 		m.setDomain("Apple");
-		//m.setMarketertype("Phones");
+		m.setMarketertype("Phones");
 		m.setName("Steve Jobs");
 
 		try {
